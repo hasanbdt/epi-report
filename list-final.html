@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>চূড়ান্ত ফলাফলের তালিকা</title>
+  <style>
+    body {
+      font-family: 'Siyam Rupali', sans-serif;
+      background: #fffdee;
+      padding-left:60px;
+      padding-right:60px;
+      max-width: 98%;
+      margin: auto;
+    }
+    h2, h3 {
+      text-align: center;
+      color: #333;
+    }
+    .filter-area {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .filter-area input, .filter-area select {
+      padding: 5px 10px;
+      margin: 5px;
+      font-size: 14px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 6px;
+      text-align: center;
+      font-size: 14px;
+    }
+    th {
+      background-color: #007f5f;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f7f7f7;
+    }
+    .print-buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+    button {
+      padding: 6px 12px;
+      font-size: 14px;
+      margin: 0 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+    }
+    .print-btn { background: #28a745; color: white; }
+    .excel-btn { background: #007bff; color: white; }
+    @media print {
+      .filter-area, .print-buttons, .nav-links { display: none !important; }
+      th { background-color: #007f5f !important; color: white !important; }
+    }
+
+    .institute-header {
+      text-align: center;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      font-family: 'Siyam Rupali', sans-serif;
+    }
+
+    .institute-header .logo {
+      width: 100px;
+      height: auto;
+      vertical-align: middle;
+      margin-bottom: 0px;
+    }
+
+    .institute-header h1 {
+      color: #007f5f;
+      margin: 5px 0 2px 0;
+      font-size: 24px;
+    }
+
+    .institute-header h3 {
+      color: #555;
+      margin: 2px 0 10px 0;
+      font-size: 16px;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Base URL for relative links -->
+<base href="https://hasanbdt.github.io/daily-st-report/">
+
+<!-- ✅ Navigation Menu Start -->
+<style>
+  .nav-links {
+    background-color: #007f5f;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    background-color: #34a0a4;
+  }
+</style>
+
+<div class="nav-links">
+  <a href="index.html">📥 রিপোর্ট জমা</a>
+  <a href="list.html">📋 রিপোর্ট সম্মিলিত</a>
+  <a href="list-final.html">⭐ রিপোর্ট চূড়ান্ত</a>
+  <a href="edit.html">✏️ রিপোর্ট এডিট</a>
+</div>
+<!-- ✅ Navigation Menu End -->
+
+  <div class="institute-header">
+    <img src="epi.png" alt="Logo" class="logo" />
+    <h1>ইপিআই একাডেমি, ঢাকা</h1>
+    <h3>স্বপ্ন পূরণে আগামীর পথে...</h3>
+  </div>
+
+  <h3>📋 শিক্ষার্থীদের চূড়ান্ত ফলাফল</h3>
+
+  <div class="filter-area">
+    <input type="date" id="filterDate">
+    <input type="text" id="filterName" placeholder="নাম">
+    <select id="filterClass">
+      <option value="">সব শ্রেণি</option>
+      <option value="One">One</option>
+      <option value="Two">Two</option>
+      <option value="Three">Three</option>
+      <option value="Four">Four</option>
+      <option value="Five">Five</option>
+      <option value="Six">Six</option>
+      <option value="Seven">Seven</option>
+      <option value="Eight">Eight</option>
+    </select>
+    <button onclick="filterData()">ফিল্টার করুন</button>
+    <button onclick="showAll()">সব দেখান</button>
+  </div>
+
+  <table id="finalTable">
+    <thead>
+      <tr>
+        <th>নাম</th>
+        <th>ক্লাস</th>
+        <th>রোল</th>
+        <th>মোট স্কোর</th>
+        <th>স্টার</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <p style= "font-size:15px; color: red; text-align: center;">দূর্ভাগ্য তার জন্য; যার আজকের দিনটি গতকালের চেয়ে উত্তম হলো না।</p>
+
+  <div class="print-buttons">
+    <button class="print-btn" onclick="window.print()">🖨️ প্রিন্ট PDF</button>
+    <button class="excel-btn" onclick="exportToExcel()">📥 এক্সেল ডাউনলোড</button>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDwKp_6znRl7TkIpXa3uFuZGOUxSHnkHOM",
+      authDomain: "dailyreport-9512d.firebaseapp.com",
+      databaseURL: "https://dailyreport-9512d-default-rtdb.firebaseio.com",
+      projectId: "dailyreport-9512d",
+      storageBucket: "dailyreport-9512d.appspot.com",
+      messagingSenderId: "469725849063",
+      appId: "1:469725849063:web:3d82a4560478d1b11f8942"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const scoreMap = {
+      dayFeeling: {"😃 খুব ভালো": 1, "🙂 মোটামুটি": 0.5, "😐 খারাপ": 0},
+      learned: {"📘 নতুন দোয়া/মন্ত্র": 1, "📗 কোরআনের আয়াত/গীতার শ্লোক": 1, "📙 গণিত/বিজ্ঞান/কম্পিউটার": 0.7, "📙 নতুন শব্দার্থ (আরবী/ইংরেজি)": 0.7, "📕 ইসলামিক আদব/ধর্মীয় আদব": 1, "🤷 কিছু শিখিনি": 0},
+      goodDeed: {"🕌 কাউকে ভালো কিছু শিখিয়েছি": 1, "👐 সাহায্য করেছি": 1, "😊 ভালো ব্যবহার করেছি": 0.7, "👐 কাউকে ক্ষমা করে দিয়েছি": 0.7, "😇 মিথ্যা বলিনি": 0.7, "🙁 কিছু করিনি": 0},
+      mistake: {"✅ কোনো ভুল করিনি": 1, "✅ ভুলের জন্য ক্ষমা চেয়েছি": 0.5, "🙊 মিথ্যা বলেছি": 0, "😡 রাগ করেছি": 0.3, "📚 ক্লাস/প্রাইভেটের পড়া ভালো হয়নি": 0.3, "📱 মোবাইল বেশি দেখেছি": 0.2},
+      lovedPerson: {"👩 মা": 1, "👨 বাবা": 1, "👨‍🏫 শিক্ষক": 0.75, "👧 বন্ধু": 0.5, "🤐 কেউ না": 0},
+      thoughtAbout: {"🕋 আল্লাহ/স্রষ্টা": 1, "📖 পড়ালেখা": 0.8, "⚽ খেলাধুলা": 0.4, "👐 পরিবার/অর্থনীতি": 0.6, "👐 সমাজ/দেশ": 0.6, "🙂 কিছু না": 0},
+      prayerTimes: {"🕋 ৫ বার": 1, "🕌 ৩-৪ বার": 0.6, "😕 ১-২ বার": 0.3, "🙁 ১ বারও না": 0},
+      rememberAllah: {"🔟 ১০ বারের বেশি": 1, "➐ ৫-১০ বার": 0.7, "➌ ১-৪ বার": 0.3, "🙁 একবারও না": 0}   
+	};
+
+    function calculateStars(item) {
+      let total = 0;
+      for (let key in scoreMap) {
+        let answer = item[key] || '';
+        let value = scoreMap[key][answer] || 0;
+        total += value;
+      }
+      return {
+        score: total,
+        stars: Math.round((total / 8) * 5)
+      };
+    }
+
+    function renderStars(n) {
+      return "⭐".repeat(n) + "☆".repeat(5 - n);
+    }
+
+    function loadData(filter = {}) {
+      db.ref("dailyReports").once("value").then(snap => {
+        const data = snap.val();
+        const tbody = document.querySelector("#finalTable tbody");
+        tbody.innerHTML = "";
+        if (data) {
+          Object.values(data).forEach(item => {
+            if (
+              (!filter.date || new Date(item.timestamp).toISOString().split("T")[0] === filter.date) &&
+              (!filter.name || item.studentName.includes(filter.name)) &&
+              (!filter.class || item.studentClass === filter.class)
+            ) {
+              const { score, stars } = calculateStars(item);
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
+                <td>${item.studentName}</td>
+                <td>${item.studentClass}</td>
+                <td>${item.studentRoll}</td>
+                <td>${score.toFixed(2)}</td>
+                <td>${renderStars(stars)}</td>
+              `;
+              tbody.appendChild(tr);
+            }
+          });
+        }
+      });
+    }
+
+    function filterData() {
+      const date = document.getElementById("filterDate").value;
+      const name = document.getElementById("filterName").value.trim();
+      const studentClass = document.getElementById("filterClass").value;
+      loadData({ date, name, class: studentClass });
+    }
+
+    function showAll() {
+      document.getElementById("filterDate").value = "";
+      document.getElementById("filterName").value = "";
+      document.getElementById("filterClass").value = "";
+      loadData();
+    }
+
+    function exportToExcel() {
+      const table = document.getElementById("finalTable");
+      const html = table.outerHTML.replace(/ /g, '%20');
+      const link = document.createElement('a');
+      link.href = 'data:application/vnd.ms-excel,' + html;
+      link.download = 'FinalReport.xls';
+      link.click();
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

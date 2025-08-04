@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>রিপোর্ট এডিট করুন</title>
+  <style>
+    body {
+      font-family: "Siyam Rupali", sans-serif;
+      background: #fffdee;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #d35400;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .submit-btn {
+      margin-top: 20px;
+      background-color: #d35400;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .submit-btn:hover {
+      background-color: #a04000;
+    }
+
+    .institute-header {
+      text-align: center;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+
+    .institute-header .logo {
+      width: 100px;
+      height: auto;
+      vertical-align: middle;
+    }
+
+    .institute-header h1 {
+      color: #007f5f;
+      margin: 5px 0 2px 0;
+      font-size: 24px;
+    }
+
+    .institute-header h3 {
+      color: #555;
+      margin: 2px 0 10px 0;
+      font-size: 16px;
+      font-weight: normal;
+    }
+
+    .nav-links {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .nav-links a {
+      margin: 0 10px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Base URL for relative links -->
+<base href="https://hasanbdt.github.io/daily-st-report/">
+
+<!-- ✅ Navigation Menu Start -->
+<style>
+  .nav-links {
+    background-color: #007f5f;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    background-color: #34a0a4;
+  }
+</style>
+
+<div class="nav-links">
+  <a href="index.html">📥 রিপোর্ট জমা</a>
+  <a href="list.html">📋 রিপোর্ট সম্মিলিত</a>
+  <a href="list-final.html">⭐ রিপোর্ট চূড়ান্ত</a>
+  <a href="edit.html">✏️ রিপোর্ট এডিট</a>
+</div>
+<!-- ✅ Navigation Menu End -->
+
+
+<!-- 🔐 পাসওয়ার্ড প্রোটেকশন -->
+<script>
+  const correctPassword = "12345";
+  const userPassword = prompt("🔐 এই পেইজ দেখতে পাসওয়ার্ড দিন:");
+
+  if (userPassword !== correctPassword) {
+    document.body.innerHTML = "<h2 style='color:red; text-align:center; margin-top:100px;'>⛔ ভুল পাসওয়ার্ড! অনুগ্রহ করে সঠিক পাসওয়ার্ড দিন।</h2>";
+  }
+</script>
+
+<div class="institute-header">
+  <img src="epi.png" alt="Logo" class="logo" />
+  <h1>ইপিআই একাডেমি, ঢাকা</h1>
+  <h3>স্বপ্ন পূরণে আগামীর পথে...</h3>
+</div>
+
+<h2>📝 রিপোর্ট এডিট করুন</h2>
+<form id="editForm">
+  <label>শিক্ষার্থীর নাম:</label>
+  <input type="text" id="studentName" required>
+
+  <label>ক্লাস:</label>
+  <input type="text" id="studentClass" required>
+
+  <label>রোল:</label>
+  <input type="text" id="studentRoll" required>
+
+  <label>১. আজকের দিনটি কেমন ছিল?</label>
+  <select id="dayFeeling">
+    <option>😃 খুব ভালো</option>
+    <option>🙂 মোটামুটি</option>
+    <option>😐 খারাপ</option>
+  </select>
+
+  <label>২. আমি আজ কী শিখেছি?</label>
+  <select id="learned" required>
+    <option value="" disabled selected>-- নির্বাচন করুন --</option>
+    <option>📗 কোরআনের আয়াত/গীতার শ্লোক </option>
+    <option>📘 নতুন দোয়া/মন্ত্র</option>
+    <option>📕 ইসলামিক আদব/ধর্মীয় আদব</option>
+    <option>📙 গণিত/বিজ্ঞান/কম্পিউটার</option>
+    <option>📙 নতুন শব্দার্থ (আরবী/ইংরেজি)</option>
+    <option>🤷 কিছু শিখিনি</option>
+  </select>
+
+  <label>৩. আজ আমি কী ভালো কাজ করেছি?</label>
+  <select id="goodDeed" required>
+    <option value="" disabled selected>-- নির্বাচন করুন --</option>
+    <option>🕌 কাউকে ভালো কিছু শিখিয়েছি</option>
+    <option>👐 সাহায্য করেছি</option>
+    <option>😊 ভালো ব্যবহার করেছি</option>
+    <option>👐 কাউকে ক্ষমা করে দিয়েছি</option>
+    <option>😇 মিথ্যা বলিনি</option>
+    <option>🙁 কিছু করিনি</option>
+  </select>
+
+  <label>৪. আজ কোনো ভুল করেছি?</label>
+  <select id="mistake" required>
+    <option value="" disabled selected>-- নির্বাচন করুন --</option>
+    <option>📱 মোবাইল বেশি দেখেছি</option>
+    <option>📚 ক্লাস/প্রাইভেটের পড়া ভালো হয়নি</option>
+    <option>😡 রাগ করেছি</option>
+    <option>🙊 মিথ্যা বলেছি</option>
+    <option>✅ ভুলের জন্য ক্ষমা চেয়েছি</option>
+    <option>✅ কোনো ভুল করিনি</option>
+  </select>
+
+  <label>৫. আজ আমার উপর কে বেশি খুশি ছিল?</label>
+  <select id="lovedPerson" required>
+    <option value="" disabled selected>-- নির্বাচন করুন --</option>
+    <option>👩 মা</option>
+    <option>👨 বাবা</option>
+    <option>👨‍🏫 শিক্ষক</option>
+    <option>👧 বন্ধু</option>
+    <option>🤐 কেউ না</option>
+  </select>
+
+  <label>৬. আজ কী নিয়ে বেশি ভাবছিলাম?</label>
+  <select id="thoughtAbout" required>
+    <option value="" disabled selected>-- নির্বাচন করুন --</option>
+    <option>🕋 আল্লাহ/স্রষ্টা</option>
+    <option>📖 পড়ালেখা</option>
+    <option>⚽ খেলাধুলা</option>
+    <option>👐 পরিবার/অর্থনীতি</option>
+    <option>👐 সমাজ/দেশ</option>
+    <option>🙂 কিছু না</option>
+  </select>
+
+  <label>৭. আজ আমি কয় বার প্রার্থনা করেছি?</label>
+  <select id="prayerTimes">
+    <option>🕋 ৫ বার</option>
+    <option>🕌 ৩-৪ বার</option>
+    <option>😕 ১-২ বার</option>
+    <option>🙁 ১ বারও না</option>
+  </select>
+
+  <label>৮. আজ আমি কতবার আল্লাহকে/স্রষ্টাকে স্মরণ করেছি?</label>
+  <select id="rememberAllah">
+    <option>🔟 ১০ বারের বেশি</option>
+    <option>➐ ৫-১০ বার</option>
+    <option>➌ ১-৪ বার</option>
+    <option>🙁 একবারও না</option>
+  </select>
+
+  <button type="submit" class="submit-btn">🔁 আপডেট করুন</button>
+</form>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDwKp_6znRl7TkIpXa3uFuZGOUxSHnkHOM",
+    authDomain: "dailyreport-9512d.firebaseapp.com",
+    databaseURL: "https://dailyreport-9512d-default-rtdb.firebaseio.com",
+    projectId: "dailyreport-9512d",
+    storageBucket: "dailyreport-9512d.appspot.com",
+    messagingSenderId: "469725849063",
+    appId: "1:469725849063:web:3d82a4560478d1b11f8942"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  const form = document.getElementById("editForm");
+
+  function setValue(id, value) {
+    document.getElementById(id).value = value || "";
+  }
+
+  function getValue(id) {
+    return document.getElementById(id).value;
+  }
+
+  // ডাটা লোড
+  if (id) {
+    db.ref("dailyReports/" + id).once("value").then(snapshot => {
+      const data = snapshot.val();
+      if (data) {
+        setValue("studentName", data.studentName);
+        setValue("studentClass", data.studentClass);
+        setValue("studentRoll", data.studentRoll);
+        setValue("dayFeeling", data.dayFeeling);
+        setValue("learned", data.learned);
+        setValue("goodDeed", data.goodDeed);
+        setValue("mistake", data.mistake);
+        setValue("lovedPerson", data.lovedPerson);
+        setValue("thoughtAbout", data.thoughtAbout);
+        setValue("prayerTimes", data.prayerTimes);
+        setValue("rememberAllah", data.rememberAllah);
+      }
+    });
+  }
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const updatedData = {
+      studentName: getValue("studentName"),
+      studentClass: getValue("studentClass"),
+      studentRoll: getValue("studentRoll"),
+      dayFeeling: getValue("dayFeeling"),
+      learned: getValue("learned"),
+      goodDeed: getValue("goodDeed"),
+      mistake: getValue("mistake"),
+      lovedPerson: getValue("lovedPerson"),
+      thoughtAbout: getValue("thoughtAbout"),
+      prayerTimes: getValue("prayerTimes"),
+      rememberAllah: getValue("rememberAllah"),
+      timestamp: new Date().toISOString()
+    };
+
+    db.ref("dailyReports/" + id).set(updatedData).then(() => {
+      alert("✅ রিপোর্ট সফলভাবে আপডেট হয়েছে!");
+      window.location.href = "list.html";
+    });
+  });
+</script>
+
+</body>
+</html>

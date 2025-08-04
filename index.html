@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>আমার দিনের রিপোর্ট</title>
+  <style>
+    body {
+      font-family: "Siyam Rupali", sans-serif, Arial, sans-serif;
+      background: #fffdee;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h3 {
+      text-align: center;
+      color: #007f5f;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    .submit-btn {
+      margin-top: 20px;
+      background-color: #38b000;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .submit-btn:hover {
+      background-color: #2d6a4f;
+    }
+	
+	.institute-header {
+	  text-align: center;
+	  margin-bottom: 10px;
+	  margin-top: 10px;
+	  font-family: 'Siyam Rupali', sans-serif;
+	}
+
+	.institute-header .logo {
+	  width: 100px;
+	  height: auto;
+	  vertical-align: middle;
+	  margin-bottom: 0px;
+	}
+
+	.institute-header h1 {
+	  color: #007f5f;
+	  margin: 5px 0 2px 0; /* উপরে নিচে ফাঁকা কম */
+	  font-size: 24px;
+	}
+
+	.institute-header h3 {
+	  color: #555;
+	  margin: 2px 0 10px 0;
+	  font-size: 16px;
+	  font-weight: normal;
+	}
+  </style>
+</head>
+<body>
+
+<!-- Base URL for relative links -->
+<base href="https://hasanbdt.github.io/daily-st-report/">
+
+<!-- ✅ Navigation Menu Start -->
+<style>
+  .nav-links {
+    background-color: #007f5f;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    background-color: #34a0a4;
+  }
+</style>
+
+<div class="nav-links">
+  <a href="index.html">📥 রিপোর্ট জমা</a>
+  <a href="list.html">📋 রিপোর্ট সম্মিলিত</a>
+  <a href="list-final.html">⭐ রিপোর্ট চূড়ান্ত</a>
+  <a href="edit.html">✏️ রিপোর্ট এডিট</a>
+</div>
+<!-- ✅ Navigation Menu End -->
+
+
+<div class="institute-header">
+  <img src="epi.png" alt="Logo" class="logo" />
+  <h1>ইপিআই একাডেমি, ঢাকা</h1>
+  <h3>স্বপ্ন পূরণে আগামীর পথে...</h3>
+</div>
+
+
+
+  <h3>🌞 আমার আজকের দিনের রিপোর্ট</h3>
+  
+  <div style="background: #f9fcff; border-left: 5px solid #007f5f; padding: 15px; margin-bottom: 20px; font-family: 'Siyam Rupali', sans-serif; font-size: 16px; line-height: 1.8;">
+	  <p style="color: #00509e;"><strong>🔹 “আল্লাহ্‌ সবকিছু দেখেন ও জানেন — তোমার ফর্ম পূরণ করাটাও।”</strong></p>
+	  <p style="color: #d00000;">🔹 “মিথ্যা বলা হারাম, আর মিথ্যা রিপোর্ট দেওয়া বড় গুনাহ।”</p>
+	  <p style="color: #007f5f;">🔹 “আল্লাহ্‌ সত্যবাদী বান্দাকে ভালোবাসেন।”</p>
+	  <p style="color: #007f5f;">🔹 “হে আল্লাহ/স্রষ্টা, তুমি আমাকে একজন সত্যিকারের ভালো মানুষ হতে সর্বদা সাহায্য কর।”</p>
+  </div>
+
+  
+  <form id="reportForm">
+    
+    <label>শিক্ষার্থীর নাম</label>
+    <input type="text" name="studentName" required placeholder="Name(Only First Name)" />
+
+    <label>ক্লাস</label>
+    <input type="text" name="studentClass" required placeholder="Class(Letter)" />
+
+    <label>রোল</label>
+    <input type="text" name="studentRoll" required placeholder="Roll" />
+
+    <label>১. আজকের দিনটি কেমন ছিল?</label>
+    <select name="dayFeeling" required>
+      <option value="" disabled selected>-- নির্বাচন করুন --</option>
+      <option>😃 খুব ভালো</option>
+      <option>🙂 মোটামুটি</option>
+      <option>😐 খারাপ</option>
+    </select>
+
+    <label>২. আমি আজ কী শিখেছি?</label>
+    <select name="learned" required>
+      <option value="" disabled selected>-- নির্বাচন করুন --</option>
+      <option>📗 কোরআনের আয়াত/গীতার শ্লোক </option>
+	  <option>📘 নতুন দোয়া/মন্ত্র</option>
+	  <option>📕 ইসলামিক আদব/ধর্মীয় আদব</option>
+	  <option>📙 গণিত/বিজ্ঞান/কম্পিউটার</option>
+	  <option>📙 নতুন শব্দার্থ (আরবী/ইংরেজি)</option>
+	  <option>🤷 কিছু শিখিনি</option>
+    </select>
+
+    <label>৩. আজ আমি কী ভালো কাজ করেছি?</label>
+    <select name="goodDeed" required>
+      <option value="" disabled selected>-- নির্বাচন করুন --</option>
+      <option>🕌 কাউকে ভালো কিছু শিখিয়েছি</option>
+      <option>👐 সাহায্য করেছি</option>
+      <option>😊 ভালো ব্যবহার করেছি</option>
+	  <option>👐 কাউকে ক্ষমা করে দিয়েছি</option>
+      <option>😇 মিথ্যা বলিনি</option>
+      <option>🙁 কিছু করিনি</option>
+    </select>
+
+    <label>৪. আজ কোনো ভুল করেছি?</label>
+	  <select name="mistake" required>
+		<option value="" disabled selected>-- নির্বাচন করুন --</option>
+		<option>📱 মোবাইল বেশি দেখেছি</option>
+		<option>📚 ক্লাস/প্রাইভেটের পড়া ভালো হয়নি</option>
+		<option>😡 রাগ করেছি</option>
+		<option>🙊 মিথ্যা বলেছি</option>
+		<option>✅ ভুলের জন্য ক্ষমা চেয়েছি</option>
+		<option>✅ কোনো ভুল করিনি</option>
+	  </select>
+
+    <label>৫. আজ আমার উপর কে বেশি খুশি ছিল?</label>
+	  <select name="lovedPerson" required>
+		<option value="" disabled selected>-- নির্বাচন করুন --</option>
+		<option>👩 মা</option>
+		<option>👨 বাবা</option>
+		<option>👨‍🏫 শিক্ষক</option>
+		<option>👧 বন্ধু</option>
+		<option>🤐 কেউ না</option>
+	  </select>
+
+    <label>৬. আজ কী নিয়ে বেশি ভাবছিলাম?</label>
+	  <select name="thoughtAbout" required>
+		<option value="" disabled selected>-- নির্বাচন করুন --</option>
+		<option>🕋 আল্লাহ/স্রষ্টা</option>
+		<option>📖 পড়ালেখা</option>
+		<option>⚽ খেলাধুলা</option>
+		<option>👐 পরিবার/অর্থনীতি</option>
+		<option>👐 সমাজ/দেশ</option>
+		<option>🙂 কিছু না</option>
+	  </select>
+
+    <label>৭. আজ আমি কতবার প্রার্থনা করেছি?</label>
+    <select name="prayerTimes" required>
+      <option value="" disabled selected>-- নির্বাচন করুন --</option>
+      <option>🕋 ৫ বার</option>
+      <option>🕌 ৩-৪ বার</option>
+      <option>😕 ১-২ বার</option>
+      <option>🙁 ১ বারও না</option>
+    </select>
+
+    <label>৮. আজ আমি কতবার আল্লাহকে/স্রষ্টাকে স্মরণ করেছি?</label>
+    <select name="rememberAllah" required>
+      <option value="" disabled selected>-- নির্বাচন করুন --</option>
+      <option>🔟 ১০ বারের বেশি</option>
+      <option>➐ ৫-১০ বার</option>
+      <option>➌ ১-৪ বার</option>
+      <option>🙁 একবারও না</option>
+    </select>
+
+    <button type="submit" class="submit-btn">✅ রিপোর্ট জমা দাও</button>
+  </form>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDwKp_6znRl7TkIpXa3uFuZGOUxSHnkHOM",
+      authDomain: "dailyreport-9512d.firebaseapp.com",
+      databaseURL: "https://dailyreport-9512d-default-rtdb.firebaseio.com",
+      projectId: "dailyreport-9512d",
+      storageBucket: "dailyreport-9512d.firebasestorage.app",
+      messagingSenderId: "469725849063",
+      appId: "1:469725849063:web:3d82a4560478d1b11f8942"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+	
+	// ✅ শুধু ইংরেজি অক্ষর, সংখ্যা ও স্পেস অনুমোদন
+function enforceEnglishOnly(inputElement) {
+  inputElement.addEventListener("input", function () {
+    this.value = this.value.replace(/[^A-Za-z0-9 ]/g, "");
+  });
+}
+
+
+    const form = document.getElementById('reportForm');
+	
+	// ইনপুট ফিল্ডগুলো নির্বাচন করে ইংরেজি সীমাবদ্ধতা প্রয়োগ
+enforceEnglishOnly(form.studentName);
+enforceEnglishOnly(form.studentClass);
+enforceEnglishOnly(form.studentRoll);
+
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const data = {
+        studentName: form.studentName.value.trim(),
+        studentClass: form.studentClass.value.trim(),
+        studentRoll: form.studentRoll.value.trim(),
+
+        dayFeeling: form.dayFeeling.value,
+        learned: form.learned.value,
+        goodDeed: form.goodDeed.value,
+        mistake: form.mistake.value,
+        lovedPerson: form.lovedPerson.value,
+        thoughtAbout: form.thoughtAbout.value,
+        prayerTimes: form.prayerTimes.value,
+        rememberAllah: form.rememberAllah.value,
+
+        timestamp: new Date().toISOString()
+      };
+
+      database.ref('dailyReports').push(data)
+        .then(() => {
+          alert('রিপোর্ট সফলভাবে জমা হয়েছে!');
+          form.reset();
+        })
+        .catch(error => {
+          alert('রিপোর্ট জমা দিতে সমস্যা হয়েছে: ' + error.message);
+        });
+    });
+  </script>
+
+</body>
+</html>
