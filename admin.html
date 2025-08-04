@@ -96,7 +96,6 @@
 </head>
 <body> 
 
-
 <!-- Base URL for relative links -->
 <base href="https://hasanbdt.github.io/epi-report/">
 
@@ -135,6 +134,18 @@
   <a href="https://hasanbdt.github.io/epi-report/edit.html">✏️ রিপোর্ট এডিট</a>
 </div>
 <!-- ✅ Navigation Menu End -->
+
+
+<script>
+  // ⛔ শুধু দেখানোর পাসওয়ার্ড সিস্টেম (নিরাপত্তা ছাড়া)
+  const correctPassword = "12345"; // পাসওয়ার্ড এখানে দিন
+
+  const userPassword = prompt("🔐 এই পেইজ দেখতে পাসওয়ার্ড দিন:");
+
+  if (userPassword !== correctPassword) {
+    document.body.innerHTML = "<h2 style='color:red; text-align:center; margin-top:100px;'>⛔ ভুল পাসওয়ার্ড! অনুগ্রহ করে সঠিক পাসওয়ার্ড দিন।</h2>";
+  }
+</script>
 
 <div class="institute-header">
   <img src="epi.png" alt="Logo" class="logo" />
@@ -225,7 +236,7 @@
     </div>
 	<h3 style="text-align:center; color:#007f5f; font-size: 30px; margin-bottom: 10px;">📋 শিক্ষার্থীদের চূড়ান্ত ফলাফল </h3>
 
-	<table id="finalTable">
+    <table id="finalTable">
       <thead>
         <tr>
           <th>নাম</th>
@@ -320,7 +331,7 @@
               <td>${item.rememberAllah}</td>
               <td>
                 <button class="edit-btn" onclick="window.location.href='edit.html?id=${id}'">✏️</button>
-                <button class="delete-btn" onclick="window.location.href='list admin.html?id=${id}'">🗑️</button>
+                <button class="delete-btn" onclick="deleteReport('${id}')">🗑️</button>
               </td>
             `;
             tableBody.appendChild(tr);
@@ -399,12 +410,6 @@
           th, td { border: 1px solid #aaa; padding: 6px; text-align: center; }
           th { background: #007f5f; color: white; }
           tr:nth-child(even) { background: #f2f2f2; }
-		  
-		  @media print {
-      #finalActions, button {
-        display: none !important;
-      }
-		  
         </style>
       </head>
       <body>${printContent}</body></html>
