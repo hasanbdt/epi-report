@@ -181,7 +181,7 @@
         <th>ভাবনা</th>
         <th>নামাজ</th>
         <th>স্মরণ</th>
-        
+        <th>✏️</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -318,7 +318,10 @@
               <td>${item.thoughtAbout}</td>
               <td>${item.prayerTimes}</td>
               <td>${item.rememberAllah}</td> 
-                          `
+              <td>
+                <button class="edit-btn" onclick="window.location.href='edit.html?id=${id}'">✏️</button>
+                <button class="delete-btn" onclick="window.location.href='admin.html?id=${id}'">🗑️</button>
+              </td>             `
             tableBody.appendChild(tr);
           });
         }
@@ -421,4 +424,5 @@
   }
 </script>
 </body>
+
 </html>
