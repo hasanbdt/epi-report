@@ -278,6 +278,8 @@
         setValue("thoughtAbout", data.thoughtAbout);
         setValue("prayerTimes", data.prayerTimes);
         setValue("rememberAllah", data.rememberAllah);
+        // ✅ পুরনো timestamp ধরে রাখার জন্য
+        form.dataset.timestamp = data.timestamp || "";
       }
     });
   }
@@ -298,11 +300,12 @@
       prayerTimes: getValue("prayerTimes"),
       rememberAllah: getValue("rememberAllah"),
       timestamp: new Date().toISOString()
+      timestamp: form.dataset.timestamp || new Date().toISOString()  // ✅ আগেরটা থাকলে সেটা রাখবে
     };
 
     db.ref("dailyReports/" + id).set(updatedData).then(() => {
       alert("✅ রিপোর্ট সফলভাবে আপডেট হয়েছে!");
-      window.location.href = "edit.html";
+      window.location.href = "admin.html";
     });
   });
 </script>
@@ -327,3 +330,4 @@
 
 </body>
 </html>
+
