@@ -96,6 +96,18 @@
 </head>
 <body> 
 
+<!-- পাসওয়ার্ড শুরু -->
+<div id="passwordPrompt" style="text-align:center; margin-top:100px;">
+  <h2>🔐 এই পেইজ দেখতে পাসওয়ার্ড দিন:</h2>
+  <input type="password" id="pagePassword" placeholder="পাসওয়ার্ড দিন" style="padding:10px; font-size:16px;"/>
+  <br><br>
+  <button onclick="verifyPassword()" style="padding:8px 20px; font-size:16px;">সাবমিট</button>
+  <p id="errorText" style="color:red; margin-top:10px;"></p>
+</div>
+
+<div id="mainContent" style="display:none;">
+  <!-- পাসওয়ার্ড শেষ -->
+
 <!-- Base URL for relative links -->
 <base href="https://hasanbdt.github.io/epi-report/">
 
@@ -130,22 +142,10 @@
   <a href="https://hasanbdt.github.io/epi-report/index.html">📥 রিপোর্ট জমা</a>
   <a href="https://hasanbdt.github.io/epi-report/list.html">📋 রিপোর্ট সম্মিলিত</a>
   <a href="https://hasanbdt.github.io/epi-report/list-final.html">⭐ রিপোর্ট চূড়ান্ত</a>
-  <a href="https://hasanbdt.github.io/epi-report/admin.html">⭐ রিপোর্ট চূড়ান্ত</a>
-  <a href="https://hasanbdt.github.io/epi-report/edit.html">✏️ রিপোর্ট এডিট</a>
-</div>
+  <a href="https://hasanbdt.github.io/epi-report/edit.html">⭐ সম্পাদনা</a>
+  <a href="https://hasanbdt.github.io/epi-report/admin.html">⭐ এ্যাডমিন প্যানেল</a>
+</div> 
 <!-- ✅ Navigation Menu End -->
-
-
-<script>
-  // ⛔ শুধু দেখানোর পাসওয়ার্ড সিস্টেম (নিরাপত্তা ছাড়া)
-  const correctPassword = "12345"; // পাসওয়ার্ড এখানে দিন
-
-  const userPassword = prompt("🔐 এই পেইজ দেখতে পাসওয়ার্ড দিন:");
-
-  if (userPassword !== correctPassword) {
-    document.body.innerHTML = "<h2 style='color:red; text-align:center; margin-top:100px;'>⛔ ভুল পাসওয়ার্ড! অনুগ্রহ করে সঠিক পাসওয়ার্ড দিন।</h2>";
-  }
-</script>
 
 <div class="institute-header">
   <img src="epi.png" alt="Logo" class="logo" />
@@ -429,5 +429,23 @@
     link.click();
   }
 </script>
+
+<script>
+  function verifyPassword() {
+    const correctPassword = "19895"; // আপনার পাসওয়ার্ড এখানে দিন
+    const userInput = document.getElementById("pagePassword").value;
+
+    if (userInput === correctPassword) {
+      document.getElementById("passwordPrompt").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
+    } else {
+      document.getElementById("errorText").textContent = "⛔ ভুল পাসওয়ার্ড! অনুগ্রহ করে সঠিক পাসওয়ার্ড দিন।";
+    }
+  }
+
+  // ব্রাউজার স্ক্রিপ্ট বন্ধ থাকলে পেইজ লুকানো থাকবে
+  document.getElementById("mainContent").style.display = "none";
+</script>
+
 </body>
 </html>
