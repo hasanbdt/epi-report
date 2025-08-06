@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>চূড়ান্ত ফলাফলের তালিকা</title>
+  <title>রিপোর্ট স্কোর বোর্ড</title> 
   <style>
     body {
       font-family: 'Siyam Rupali', sans-serif;
@@ -59,7 +59,7 @@
     .print-btn { background: #28a745; color: white; }
     .excel-btn { background: #007bff; color: white; }
     @media print {
-      .filter-area, .print-buttons, .nav-links { display: none !important; }
+      .filter-area, .print-buttons, .nav-links, #topScorersBox { display: none !important; }
       th { background-color: #007f5f !important; color: white !important; }
     }
 
@@ -130,6 +130,7 @@
   <a href="https://hasanbdt.github.io/epi-report/edit.html">⭐ সম্পাদনা</a>
   <a href="https://hasanbdt.github.io/epi-report/admin.html">⭐ এ্যাডমিন প্যানেল</a>
 </div>
+
 <!-- ✅ Navigation Menu End -->
 
   <div class="institute-header">
@@ -138,7 +139,7 @@
     <h3>স্বপ্ন পূরণে আগামীর পথে...</h3>
   </div>
 
-  <h3>📋 শিক্ষার্থীদের চূড়ান্ত ফলাফল</h3>
+  <h3>📋 রিপোর্ট স্কোর বোর্ড</h3> 
 
   <div class="filter-area">
     <input type="date" id="filterDate">
@@ -153,21 +154,39 @@
       <option value="Six">Six</option>
       <option value="Seven">Seven</option>
       <option value="Eight">Eight</option>
+	  <option value="Eight">Eight</option>
+	  <option value="Eight">Nine</option>
+	  <option value="Eight">Ten</option> 
     </select>
     <button onclick="filterData()">ফিল্টার করুন</button>
     <button onclick="showAll()">সব দেখান</button>
   </div>
 
-  <table id="finalTable">
-    <thead>
-      <tr>
-        <th>নাম</th>
-        <th>ক্লাস</th>
-        <th>রোল</th>
-        <th>মোট স্কোর</th>
-        <th>স্টার</th>
-      </tr>
-    </thead>
+	<!-- 🔥 টপ ৫ স্কোর হোল্ডার -->
+	<div id="topScorersBox" style="position: absolute; right: 63px; top: 60px; width: 320px; background: #fffdeeb4e6; padding: 3px; border-radius: 5px; box-shadow: 0 0 5px rgba(0,0,0,0.2); font-family: 'Siyam Rupali';">
+	  <h4 style="text-align:center; color:#007f5f; margin-bottom: 0px;">⭐️ Top of List (5)</h4>
+	  <ol id="topScorersList" style="padding-left: 37px; color: green; font-size: 14px; line-height: 1.8;"></ol>
+	</div>
+
+
+
+	<table id="finalTable">
+	<thead>
+	  <tr>
+		<th>ক্রমিক</th>
+		<th>তারিখ</th>
+		<th>সময়</th>
+		<th>নাম</th>
+		<th>ক্লাস</th>
+		<th>রোল</th>
+		<th>মোট দিন</th> <!-- ✅ নতুন -->
+		<th>স্কোর</th>
+		<th>সর্বমোট স্কোর</th>
+		<th>স্টার</th>
+	  </tr>
+	</thead>
+
+
     <tbody></tbody>
   </table>
 
@@ -221,33 +240,131 @@
       return "⭐".repeat(n) + "☆".repeat(5 - n);
     }
 
-    function loadData(filter = {}) {
-      db.ref("dailyReports").once("value").then(snap => {
-        const data = snap.val();
-        const tbody = document.querySelector("#finalTable tbody");
-        tbody.innerHTML = "";
-        if (data) {
-          Object.values(data).forEach(item => {
-            if (
-              (!filter.date || new Date(item.timestamp).toISOString().split("T")[0] === filter.date) &&
-              (!filter.name || item.studentName.includes(filter.name)) &&
-              (!filter.class || item.studentClass === filter.class)
-            ) {
-              const { score, stars } = calculateStars(item);
-              const tr = document.createElement("tr");
-              tr.innerHTML = `
-                <td>${item.studentName}</td>
-                <td>${item.studentClass}</td>
-                <td>${item.studentRoll}</td>
-                <td>${score.toFixed(2)}</td>
-                <td>${renderStars(stars)}</td>
-              `;
-              tbody.appendChild(tr);
-            }
-          });
-        }
-      });
-    }
+	function loadData(filter = {}) {
+		db.ref("dailyReports").once("value").then(snap => {
+		const data = snap.val();
+		const tbody = document.querySelector("#finalTable tbody");
+		tbody.innerHTML = "";
+
+		if (!data) return;
+
+		const totalScoreMap = {};
+		const now = Date.now();
+		const keepLatest = {};
+		const dateTrackMap = {}; // ✅ মোট দিন ট্র্যাক করার জন্য
+		const daysCountMap = {}; // ✅ নাম+ক্লাস+রোল ভিত্তিক মোট আলাদা দিনের সংখ্যা
+
+		// 🧮 সর্বমোট স্কোর হিসাব ও latest সংরক্ষণ
+		Object.entries(data).forEach(([key, item]) => {
+		  const stdKey = item.studentName + "|" + item.studentClass + "|" + item.studentRoll;
+		  const score = calculateStars(item).score;
+		  if (!totalScoreMap[stdKey]) totalScoreMap[stdKey] = 0;
+		  totalScoreMap[stdKey] += score;
+
+		  // 🧹 ১ মিনিটের মধ্যে পুরাতন এন্ট্রিগুলো সংরক্ষণ না করে ডিলেট করার জন্য latest timestamp সংগ্রহ
+		  const dateKey = stdKey + "|" + new Date(item.timestamp).toISOString().split("T")[0];
+		  if (!keepLatest[dateKey] || item.timestamp > keepLatest[dateKey].timestamp) {
+			keepLatest[dateKey] = { key, item };
+		  }
+
+		  // ✅ আলাদা দিন ট্র্যাক
+		  if (!dateTrackMap[stdKey]) dateTrackMap[stdKey] = new Set();
+		  const dateOnly = new Date(item.timestamp).toISOString().split("T")[0];
+		  dateTrackMap[stdKey].add(dateOnly);
+		});
+
+		// ✅ মোট দিন হিসাব
+		for (const stdKey in dateTrackMap) {
+		  daysCountMap[stdKey] = dateTrackMap[stdKey].size;
+		}
+
+		// 🧹 পুরাতন এন্ট্রি ডিলেট (১ মিনিট আগের)
+		Object.entries(data).forEach(([key, item]) => {
+		  const stdKey = item.studentName + "|" + item.studentClass + "|" + item.studentRoll;
+		  const dateKey = stdKey + "|" + new Date(item.timestamp).toISOString().split("T")[0];
+
+		  if (keepLatest[dateKey].key !== key && now - item.timestamp > 60 * 1000) {
+			db.ref("dailyReports/" + key).remove(); // 🔴 ডিলেট
+		  }
+		});
+
+		// ✅ ফিল্টার করা ও ফলাফল দেখানো
+		let serial = 1;
+		Object.values(data).forEach(item => {
+		  const dateObj = new Date(item.timestamp);
+		  const date = dateObj.toISOString().split("T")[0];
+		  const time = dateObj.toLocaleTimeString('bn-BD');
+
+		  const stdKey = item.studentName + "|" + item.studentClass + "|" + item.studentRoll;
+		  const { score, stars } = calculateStars(item);
+		  const totalScore = totalScoreMap[stdKey] || score;
+		  const totalDays = daysCountMap[stdKey] || 1;
+
+		  // 🔍 ফিল্টার
+		  if (
+			(filter.date && filter.date !== date) ||
+			(filter.name && !item.studentName.includes(filter.name)) ||
+			(filter.class && item.studentClass !== filter.class)
+		  ) return;
+
+		  const tr = document.createElement("tr");
+		  tr.innerHTML = `
+			<td>${serial++}</td>
+			<td>${date}</td>
+			<td>${time}</td>
+			<td>${item.studentName}</td>
+			<td>${item.studentClass}</td>
+			<td>${item.studentRoll}</td>
+			<td>${totalDays} দিন</td> <!-- ✅ নতুন কলাম -->
+			<td>${score.toFixed(2)}</td>
+			<td>${totalScore.toFixed(2)}</td>
+			<td>${renderStars(stars)}</td>
+		  `;
+		  tbody.appendChild(tr);
+		  
+		// ✅ টপ ৫ শিক্ষার্থী দেখানো (সর্বমোট স্কোর অনুযায়ী)
+			const topScorersList = document.getElementById("topScorersList");
+			topScorersList.innerHTML = ""; // আগেরগুলো মুছে ফেলি
+			const sortedScorers = Object.entries(totalScoreMap)
+			  .sort((a, b) => b[1] - a[1]) // বড় থেকে ছোট
+			  .slice(0, 5); // শুধু টপ 5
+			sortedScorers.forEach(([key, score]) => {
+			  const [name, cls, roll] = key.split("|");
+			  const li = document.createElement("li");
+			  li.textContent = `${name} (${cls}, রোল: ${roll}) — স্কোর: ${score.toFixed(2)}`;
+			  topScorersList.appendChild(li);
+			});		
+			
+		});
+	  });
+	}
+	
+		function cleanOldReports() {
+		db.ref("dailyReports").once("value").then(snapshot => {
+		const data = snapshot.val();
+		const latestMap = {};
+
+		if (data) {
+		  Object.entries(data).forEach(([key, item]) => {
+			const id = `${item.studentName}_${item.studentClass}_${item.studentRoll}`;
+			if (!latestMap[id] || item.timestamp > latestMap[id].timestamp) {
+			latestMap[id] = { key, timestamp: item.timestamp };
+			}
+		  });
+
+		  Object.entries(data).forEach(([key, item]) => {
+			const id = `${item.studentName}_${item.studentClass}_${item.studentRoll}`;
+			const latestKey = latestMap[id].key;
+			const oneHourAgo = Date.now() - (60 * 60 * 1000);
+
+			if (key !== latestKey && item.timestamp < oneHourAgo) {
+			  db.ref("dailyReports/" + key).remove();
+			}
+		  });
+		}
+	  });
+	}
+
 
     function filterData() {
       const date = document.getElementById("filterDate").value;
