@@ -315,16 +315,7 @@
     }
   });
 
-  // শুরুতেই ফর্ম ও বাটন লুকিয়ে রাখুন
-  form.style.display = "none";
-  submitBtn.style.display = "none";
-  resultBtn.style.display = "none";
-
-  // ভিডিও শেষ হলে ফর্ম ও জমা বাটন দেখানো হবে
-  video.onended = () => {
-    form.style.display = "block";
-    submitBtn.style.display = "block";
-  };
+  
 
   // শুধু ইংরেজি অক্ষর, সংখ্যা, স্পেস অনুমোদন
   function enforceEnglishOnly(inputElement) {
@@ -398,4 +389,5 @@
 
 </body>
 </html>
+
 
