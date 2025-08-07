@@ -137,7 +137,11 @@
 	  <p style="color: #007f5f;">🔹 “হে আল্লাহ/স্রষ্টা, তুমি আমাকে একজন সত্যিকারের ভালো মানুষ হতে সর্বদা সাহায্য কর।”</p>
   </div>
 
-
+<!-- 🎥 ভিডিও -->
+<video id="instructionVideo" width="100%" preload="auto" controls controlsList="nodownload" disablePictureInPicture>
+  <source src="study 5 rules.mp4" type="video/mp4">
+  আপনার ব্রাউজার ভিডিও চালাতে পারছে না।
+</video>
 
 
 <form id="reportForm">
@@ -300,9 +304,31 @@
 </script>
 
 <script>
- 
+  const video = document.getElementById("instructionVideo");
+  const form = document.getElementById("reportForm");
+  const submitBtn = document.querySelector(".submit-btn");
+  const resultBtn = document.getElementById("viewResultBtn");
 
-  
+  // ভিডিও টেনে এগোনো ঠেকানো
+  let lastTime = 0;
+  video.addEventListener("timeupdate", () => {
+    if (video.currentTime - lastTime > 1) {
+      video.currentTime = lastTime;
+    } else {
+      lastTime = video.currentTime;
+    }
+  });
+
+  // শুরুতেই ফর্ম ও বাটন লুকিয়ে রাখুন
+  form.style.display = "none";
+  submitBtn.style.display = "none";
+  resultBtn.style.display = "none";
+
+  // ভিডিও শেষ হলে ফর্ম ও জমা বাটন দেখানো হবে
+  video.onended = () => {
+    form.style.display = "block";
+    submitBtn.style.display = "block";
+  };
 
   // শুধু ইংরেজি অক্ষর, সংখ্যা, স্পেস অনুমোদন
   function enforceEnglishOnly(inputElement) {
@@ -376,6 +402,3 @@
 
 </body>
 </html>
-
-
-
