@@ -300,20 +300,7 @@
 </script>
 
 <script>
-  const video = document.getElementById("instructionVideo");
-  const form = document.getElementById("reportForm");
-  const submitBtn = document.querySelector(".submit-btn");
-  const resultBtn = document.getElementById("viewResultBtn");
-
-  // ভিডিও টেনে এগোনো ঠেকানো
-  let lastTime = 0;
-  video.addEventListener("timeupdate", () => {
-    if (video.currentTime - lastTime > 1) {
-      video.currentTime = lastTime;
-    } else {
-      lastTime = video.currentTime;
-    }
-  });
+ 
 
   
 
@@ -389,5 +376,6 @@
 
 </body>
 </html>
+
 
 
