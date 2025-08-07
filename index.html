@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>আমার দিনের রিপোর্ট</title>
+  <title>আমার আজকের রিপোর্ট </title> 
   <style>
     body {
       font-family: "Siyam Rupali", sans-serif, Arial, sans-serif;
       background: #fffdee;
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
       padding: 20px;
       border-radius: 15px;
@@ -32,7 +32,7 @@
       border: 1px solid #ccc;
       box-sizing: border-box;
     }
-    .submit-btn {
+    .submit-btn, .result-btn {
       margin-top: 20px;
       background-color: #38b000;
       color: white;
@@ -42,39 +42,39 @@
       border-radius: 10px;
       cursor: pointer;
       width: 100%;
+      display: none;
     }
     .submit-btn:hover {
       background-color: #2d6a4f;
     }
-	
-	.institute-header {
-	  text-align: center;
-	  margin-bottom: 10px;
-	  margin-top: 10px;
-	  font-family: 'Siyam Rupali', sans-serif;
-	}
-
-	.institute-header .logo {
-	  width: 100px;
-	  height: auto;
-	  vertical-align: middle;
-	  margin-bottom: 0px;
-	}
-
-	.institute-header h1 {
-	  color: #007f5f;
-	  margin: 5px 0 2px 0; /* উপরে নিচে ফাঁকা কম */
-	  font-size: 24px;
-	}
-
-	.institute-header h3 {
-	  color: #555;
-	  margin: 2px 0 10px 0;
-	  font-size: 16px;
-	  font-weight: normal;
-	}
+    .result-btn {
+      background-color: #007f5f;
+    }
+    .institute-header {
+      text-align: center;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+    .institute-header .logo {
+      width: 100px;
+      height: auto;
+      vertical-align: middle;
+      margin-bottom: 0px;
+    }
+    .institute-header h1 {
+      color: #007f5f;
+      margin: 5px 0 2px 0;
+      font-size: 24px;
+    }
+    .institute-header h3 {
+      color: #555;
+      margin: 2px 0 10px 0;
+      font-size: 16px;
+      font-weight: normal;
+    }
   </style>
 </head>
+
 <body>
 
 <!-- Base URL for relative links -->
@@ -124,38 +124,45 @@
   <h3>স্বপ্ন পূরণে আগামীর পথে...</h3>
 </div>
 
+<h3>🌞 আমার আজকের দিনের রিপোর্ট</h3>
 
+<marquee direction="left" scrollamount="5" style="color: green; font-weight: ; font-size: 20px; margin-bottom: 10px;">
+  ✅ এমন জীবন তুমি করিবে গঠন, মরনে হাসিবে তুমি; কাদিবে ভূবন। ✅
+</marquee>
 
-  <h3>🌞 আমার আজকের দিনের রিপোর্ট</h3>
-  
-  <div style="background: #f9fcff; border-left: 5px solid #007f5f; padding: 15px; margin-bottom: 20px; font-family: 'Siyam Rupali', sans-serif; font-size: 16px; line-height: 1.8;">
+ <div style="background: #f9fcff; border-left: 5px solid #007f5f; padding: 15px; margin-bottom: 20px; font-family: 'Siyam Rupali', sans-serif; font-size: 16px; line-height: 1.8;">
 	  <p style="color: #00509e;"><strong>🔹 “আল্লাহ্‌ সবকিছু দেখেন ও জানেন — তোমার ফর্ম পূরণ করাটাও।”</strong></p>
 	  <p style="color: #d00000;">🔹 “মিথ্যা বলা হারাম, আর মিথ্যা রিপোর্ট দেওয়া বড় গুনাহ।”</p>
 	  <p style="color: #007f5f;">🔹 “আল্লাহ্‌ সত্যবাদী বান্দাকে ভালোবাসেন।”</p>
 	  <p style="color: #007f5f;">🔹 “হে আল্লাহ/স্রষ্টা, তুমি আমাকে একজন সত্যিকারের ভালো মানুষ হতে সর্বদা সাহায্য কর।”</p>
   </div>
 
-  
-  <form id="reportForm">
-    
-    <label>শিক্ষার্থীর নাম</label>
-    <input type="text" name="studentName" required placeholder="Name(Only First Name)" />
+<!-- 🎥 ভিডিও -->
+<video id="instructionVideo" width="100%" preload="auto" controls controlsList="nodownload" disablePictureInPicture>
+  <source src="study 5 rules.mp4" type="video/mp4">
+  আপনার ব্রাউজার ভিডিও চালাতে পারছে না।
+</video>
 
-    <label>ক্লাস</label>
-    <input type="text" name="studentClass" required placeholder="Class(Letter)" />
 
-    <label>রোল</label>
-    <input type="text" name="studentRoll" required placeholder="Roll" />
+<form id="reportForm">
+  <label>শিক্ষার্থীর নাম</label>
+  <input type="text" name="studentName" required placeholder="Name (Only First Name)" />
 
-    <label>১. আজকের দিনটি কেমন ছিল?</label>
-    <select name="dayFeeling" required>
-      <option value="" disabled selected>-- নির্বাচন করুন --</option>
-      <option>😃 খুব ভালো</option>
-      <option>🙂 মোটামুটি</option>
-      <option>😐 খারাপ</option>
-    </select>
+  <label>ক্লাস</label>
+  <input type="text" name="studentClass" required placeholder="Class (Letter)" />
 
-    <label>২. আমি আজ কী শিখেছি?</label>
+  <label>রোল</label>
+  <input type="text" name="studentRoll" required placeholder="Roll" />
+
+  <label>১. আজকের দিনটি কেমন ছিল?</label>
+  <select name="dayFeeling" required>
+    <option value="" disabled selected>-- নির্বাচন করুন --</option>
+    <option>😃 খুব ভালো</option>
+    <option>🙂 মোটামুটি</option>
+    <option>😐 খারাপ</option>
+  </select>
+
+  <label>২. আমি আজ কী শিখেছি?</label>
     <select name="learned" required>
       <option value="" disabled selected>-- নির্বাচন করুন --</option>
       <option>📗 কোরআনের আয়াত/গীতার শ্লোক </option>
@@ -227,47 +234,50 @@
       <option>🙁 একবারও না</option>
     </select>
 
-    <button type="submit" class="submit-btn">✅ রিপোর্ট জমা দাও</button>
-  </form>
+  <button type="submit" class="submit-btn">✅ রিপোর্ট জমা দাও</button>
+</form>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<button id="viewResultBtn" class="result-btn" onclick="window.location.href='https://hasanbdt.github.io/epi-report/list-final.html'">📊 ফলাফল দেখো...</button>
 
-  <script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+  // ✅ Firebase Config
   const firebaseConfig = {
     apiKey: "AIzaSyDwKp_6znRl7TkIpXa3uFuZGOUxSHnkHOM",
     authDomain: "dailyreport-9512d.firebaseapp.com",
     databaseURL: "https://dailyreport-9512d-default-rtdb.firebaseio.com",
     projectId: "dailyreport-9512d",
-    storageBucket: "dailyreport-9512d.firebasestorage.app",
+    storageBucket: "dailyreport-9512d.appspot.com",
     messagingSenderId: "469725849063",
     appId: "1:469725849063:web:3d82a4560478d1b11f8942"
   };
+
   firebase.initializeApp(firebaseConfig);
   const database = firebase.database();
 
-  const form = document.getElementById('reportForm');
-
-  // ইনপুট ফিল্ডগুলো নির্বাচন করে ইংরেজি সীমাবদ্ধতা প্রয়োগ
-  enforceEnglishOnly(form.studentName);
-  enforceEnglishOnly(form.studentClass);
-  enforceEnglishOnly(form.studentRoll);
-
+  
+  // ✅ কেবল ইংরেজি অক্ষর অনুমোদিত
   function enforceEnglishOnly(inputElement) {
     inputElement.addEventListener("input", function () {
       this.value = this.value.replace(/[^A-Za-z0-9 ]/g, "");
     });
   }
 
-  form.addEventListener('submit', function (e) {
+  enforceEnglishOnly(form.studentName);
+  enforceEnglishOnly(form.studentClass);
+  enforceEnglishOnly(form.studentRoll);
+
+  // ✅ রিপোর্ট জমা
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const data = {
       studentName: form.studentName.value.trim(),
       studentClass: form.studentClass.value.trim(),
       studentRoll: form.studentRoll.value.trim(),
-
       dayFeeling: form.dayFeeling.value,
       learned: form.learned.value,
       goodDeed: form.goodDeed.value,
@@ -276,50 +286,119 @@
       thoughtAbout: form.thoughtAbout.value,
       prayerTimes: form.prayerTimes.value,
       rememberAllah: form.rememberAllah.value,
-
       timestamp: new Date().toISOString()
     };
 
-    const today = new Date().toISOString().split("T")[0];
-    const name = data.studentName;
-    const studentClass = data.studentClass;
-    const roll = data.studentRoll;
-
-    // পুরাতন সতর্কবার্তা মুছে ফেলি
-    document.querySelectorAll('.error-message').forEach(el => el.remove());
-
-    // ডুপ্লিকেট চেক
-    database.ref('dailyReports').once('value').then(snapshot => {
-      let duplicateFound = false;
-      snapshot.forEach(child => {
-        const item = child.val();
-        const itemDate = new Date(item.timestamp).toISOString().split("T")[0];
-        if (itemDate === today && item.studentName === name && item.studentClass === studentClass && item.studentRoll === roll) {
-          duplicateFound = true;
-        }
+    database.ref("dailyReports").push(data)
+      .then(() => {
+        form.reset();
+        submitBtn.style.display = "none";
+        resultBtn.style.display = "block";
+		form.style.display = "none";
+        alert("✅ রিপোর্ট সফলভাবে জমা হয়েছে!");
+      })
+      .catch(error => {
+        alert("জমা দিতে সমস্যা হয়েছে: " + error.message);
       });
-
-      if (duplicateFound) {
-        const msg = document.createElement("div");
-        msg.className = "error-message";
-        msg.style.color = "red";
-        msg.style.marginTop = "5px";
-        msg.innerText = "⛔ আজকের জন্য এই ছাত্রের তথ্য ইতোমধ্যে জমা হয়েছে!";
-        form.studentName.parentNode.appendChild(msg);
-      } else {
-        database.ref('dailyReports').push(data)
-          .then(() => {
-            alert('✅ রিপোর্ট সফলভাবে জমা হয়েছে!');
-            form.reset();
-          })
-          .catch(error => {
-            alert('রিপোর্ট জমা দিতে সমস্যা হয়েছে: ' + error.message);
-          });
-      }
-    });
   });
 </script>
 
+<script>
+  const video = document.getElementById("instructionVideo");
+  const form = document.getElementById("reportForm");
+  const submitBtn = document.querySelector(".submit-btn");
+  const resultBtn = document.getElementById("viewResultBtn");
+
+  // ভিডিও টেনে এগোনো ঠেকানো
+  let lastTime = 0;
+  video.addEventListener("timeupdate", () => {
+    if (video.currentTime - lastTime > 1) {
+      video.currentTime = lastTime;
+    } else {
+      lastTime = video.currentTime;
+    }
+  });
+
+  // শুরুতেই ফর্ম ও বাটন লুকিয়ে রাখুন
+  form.style.display = "none";
+  submitBtn.style.display = "none";
+  resultBtn.style.display = "none";
+
+  // ভিডিও শেষ হলে ফর্ম ও জমা বাটন দেখানো হবে
+  video.onended = () => {
+    form.style.display = "block";
+    submitBtn.style.display = "block";
+  };
+
+  // শুধু ইংরেজি অক্ষর, সংখ্যা, স্পেস অনুমোদন
+  function enforceEnglishOnly(inputElement) {
+    inputElement.addEventListener("input", function () {
+      this.value = this.value.replace(/[^A-Za-z0-9 ]/g, "");
+    });
+  }
+
+  enforceEnglishOnly(form.studentName);
+  enforceEnglishOnly(form.studentClass);
+  enforceEnglishOnly(form.studentRoll);
+
+  
+  
+  form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const data = {
+    studentName: form.studentName.value.trim(),
+    studentClass: form.studentClass.value.trim(),
+    studentRoll: form.studentRoll.value.trim(),
+    dayFeeling: form.dayFeeling.value,
+    learned: form.learned.value,
+    goodDeed: form.goodDeed.value,
+    mistake: form.mistake.value,
+    lovedPerson: form.lovedPerson.value,
+    thoughtAbout: form.thoughtAbout.value,
+    prayerTimes: form.prayerTimes.value,
+    rememberAllah: form.rememberAllah.value,
+    timestamp: new Date().toISOString()
+  };
+
+  const today = new Date().toISOString().split("T")[0];
+
+  firebase.database().ref("dailyReports").once("value").then(snapshot => {
+    let duplicateFound = false;
+
+    snapshot.forEach(child => {
+      const item = child.val();
+      const itemDate = new Date(item.timestamp).toISOString().split("T")[0];
+
+      if (
+        itemDate === today &&
+        item.studentName === data.studentName &&
+        item.studentClass === data.studentClass &&
+        item.studentRoll === data.studentRoll
+      ) {
+        duplicateFound = true;
+      }
+    });
+
+    if (duplicateFound) {
+      alert("❌ আজকের জন্য এই ছাত্রের তথ্য ইতোমধ্যে জমা হয়েছে!");
+    } else {
+      firebase.database().ref("dailyReports").push(data)
+        .then(() => {
+          form.reset();
+          form.style.display = "none";
+          submitBtn.style.display = "none";
+          resultBtn.style.display = "block";
+          alert("✅ রিপোর্ট সফলভাবে জমা হয়েছে!");
+        })
+        .catch(error => {
+          alert("❌ রিপোর্ট জমা দিতে সমস্যা হয়েছে: " + error.message);
+        });
+    }
+  });
+});
+
+</script>
 
 </body>
 </html>

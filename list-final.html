@@ -59,7 +59,7 @@
     .print-btn { background: #28a745; color: white; }
     .excel-btn { background: #007bff; color: white; }
     @media print {
-      .filter-area, .print-buttons, .nav-links, #topScorersBox { display: none !important; }
+      .filter-area, .print-buttons, .nav-links, #topScorersBox, marquee { display: none !important; }
       th { background-color: #007f5f !important; color: white !important; }
     }
 
@@ -140,6 +140,10 @@
   </div>
 
   <h3>📋 রিপোর্ট স্কোর বোর্ড</h3> 
+  
+	<marquee direction="left" scrollamount="5" style="color: green; font-weight: ; font-size: 20px; margin-bottom: 10px;">
+		** 5 স্টার প্রাপ্তদেরকে আন্তরিক অভিনন্দন--- ইপিআই পরিচালক **
+	</marquee>
 
   <div class="filter-area">
     <input type="date" id="filterDate">
@@ -190,7 +194,7 @@
     <tbody></tbody>
   </table>
 
-  <p style= "font-size:15px; color: red; text-align: center;">দূর্ভাগ্য তার জন্য; যার আজকের দিনটি গতকালের চেয়ে উত্তম হলো না।</p>
+  <p style= "font-size:15px; color: red; text-align: center;">দুর্ভাগ্য তার; যার আজকের দিনটি গতকালের চেয়ে উত্তম হলো না।</p>
 
   <div class="print-buttons">
     <button class="print-btn" onclick="window.print()">🖨️ প্রিন্ট PDF</button>
