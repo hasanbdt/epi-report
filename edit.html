@@ -223,14 +223,14 @@
     <option>🙁 ১ বারও না</option>
   </select>
 
-  <label>৮. আজ আমার P H M কত % কমপ্লিট হয়েছে?</label>
-  <select name="P.H.W." required>
-    <option value="" disabled selected>-- নির্বাচন করুন --</option>
-    <option>🔟 ১০০%</option>
-    <option>➐ ৯০%</option>
-    <option>➌ ৮০%</option>
-    <option>🙁 ০%</option>
+  <label>৮. আজ আমি কতবার আল্লাহকে/স্রষ্টাকে স্মরণ করেছি?</label>
+  <select id="rememberAllah">
+    <option>🔟 ১০ বারের বেশি</option>
+    <option>➐ ৫-১০ বার</option>
+    <option>➌ ১-৪ বার</option>
+    <option>🙁 একবারও না</option>
   </select>
+
   <button type="submit" class="submit-btn">🔁 আপডেট করুন</button>
 </form>
 
@@ -279,7 +279,7 @@
         setValue("lovedPerson", data.lovedPerson);
         setValue("thoughtAbout", data.thoughtAbout);
         setValue("prayerTimes", data.prayerTimes);
-        setValue("P H M", data.P H M);
+        setValue("rememberAllah", data.rememberAllah);
         // ✅ পুরনো timestamp ধরে রাখার জন্য
         form.dataset.timestamp = data.timestamp || "";
       }
@@ -300,7 +300,7 @@
       lovedPerson: getValue("lovedPerson"),
       thoughtAbout: getValue("thoughtAbout"),
       prayerTimes: getValue("prayerTimes"),
-      P H M: getValue("P H M"),
+      rememberAllah: getValue("rememberAllah"),
       timestamp: form.dataset.timestamp || new Date().toISOString()  // ✅ আগেরটা থাকলে সেটা রাখবে
     };
 
